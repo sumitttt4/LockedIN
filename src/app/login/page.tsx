@@ -1,66 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Lock } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 
 export default function LoginPage() {
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleLogin = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        // Simulate auth
-        setTimeout(() => {
-            router.push("/dashboard");
-        }, 1000);
-    };
-
     return (
-        <div className="min-h-screen bg-white flex flex-col px-6 py-12">
-            <Link href="/" className="inline-flex items-center text-zinc-500 hover:text-zinc-900 transition-colors mb-12">
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                Back
-            </Link>
+        <div className="min-h-screen flex items-center justify-center p-4 bg-black relative overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 pattern-grid opacity-30" />
 
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-sm mx-auto flex-1 flex flex-col justify-center"
-            >
-                <div className="mb-8 text-center flex flex-col items-center">
-                    <Image src="/logo.png" alt="DayZero" width={200} height={80} className="h-24 w-auto object-contain mb-6" priority />
-                    <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Welcome Back</h1>
-                    <p className="text-zinc-500 mt-2">Enter your handle to continue</p>
-                </div>
-
-                <form onSubmit={handleLogin} className="space-y-4">
-                    <div className="space-y-2">
-                        <Input
-                            type="text"
-                            placeholder="dayzero.so/username"
-                            className="h-12 rounded-xl border-zinc-200 bg-zinc-50 focus:bg-white transition-all font-medium"
-                            required
-                        />
+            <Card className="w-full max-w-md border-white/10 bg-white/[0.02] backdrop-blur-xl shadow-2xl relative z-10">
+                <CardContent className="p-10 text-center">
+                    {/* Logo */}
+                    <div className="flex flex-col items-center mb-8">
+                        <div className="h-16 w-16 bg-white rounded-2xl flex items-center justify-center mb-4 glow-white">
+                            <Lock className="h-8 w-8 text-black" />
+                        </div>
+                        <h1 className="text-2xl font-bold text-white">Login Opens Dec 31st</h1>
+                        <p className="text-white/50 text-sm mt-2">
+                            Join the waitlist to get early access
+                        </p>
                     </div>
-                    <Button
-                        className="w-full h-12 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-lg" // Increased text size
-                        disabled={isLoading}
-                    >
-                        {isLoading ? "Verifying..." : "Continue"}
-                    </Button>
-                </form>
 
-                <p className="mt-8 text-center text-sm text-zinc-400">
-                    Don't have an account? <Link href="/" className="text-zinc-900 font-medium underline">Claim one</Link>
-                </p>
-            </motion.div>
+                    {/* Message */}
+                    <div className="mb-8 p-6 bg-white/5 border border-white/10 rounded-xl">
+                        <p className="text-white/70 leading-relaxed">
+                            We're launching on <span className="font-semibold text-white">December 31st</span>.
+                            Reserve your spot now for just <span className="text-green-400 font-bold">$5</span> (early bird)
+                            or <span className="text-white font-bold">$9</span> after.
+                        </p>
+                    </div>
+
+                    {/* CTA */}
+                    <Link href="/">
+                        <Button className="w-full h-12 bg-white hover:bg-white/90 text-black font-semibold glow-white">
+                            Join Waitlist
+                        </Button>
+                    </Link>
+
+                    <p className="text-white/40 text-xs mt-6">
+                        One-time payment. Lifetime access.
+                    </p>
+                </CardContent>
+            </Card>
         </div>
     );
 }

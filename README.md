@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LockedIn - Waitlist Launch
 
-## Getting Started
+Pre-order platform for LockedIn accountability app launching December 31st, 2025.
 
-First, run the development server:
+## 🚀 Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Current Status
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Waitlist Mode Active** - Users can join waitlist and view pricing ($5 early bird / $9 regular)
 
-## Learn More
+### Completed Features
+- ✅ Landing page with countdown to Dec 31st
+- ✅ Waitlist signup page (`/waitlist`)
+- ✅ Pricing/checkout page (`/checkout`) 
+- ✅ Email collection flow
+- ✅ Smooth animations (Framer Motion)
+- ✅ Dark mode design
+- ✅ Mobile responsive
 
-To learn more about Next.js, take a look at the following resources:
+### Coming After Deployment
+- ⏳ DoDo Payments integration
+- ⏳ Resend email automation
+- ⏳ Early bird counter (database)
+- ⏳ Success page with confirmation email
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔑 Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create `.env.local` file:
 
-## Deploy on Vercel
+```env
+# Resend API (Already provided)
+RESEND_API_KEY=re_3e18eeWn_35eiCbSrsMByfpeD2NYPDQip
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# DoDo Payments (Add after deployment)
+DODO_API_KEY=your_key_here
+DODO_SECRET_KEY=your_secret_here
+DODO_WEBHOOK_SECRET=your_webhook_secret_here
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# App URL
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+```
+
+## 📁 Key Files
+
+- `/src/app/waitlist/page.tsx` - Email collection
+- `/src/app/checkout/page.tsx` - Pricing selection
+- `/src/components/LandingPage.tsx` - Main landing page
+- `/src/components/landing/CountdownTimer.tsx` - Dec 31st countdown
+
+## 🚢 Deployment (Vercel)
+
+1. Push to GitHub
+2. Connect to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
+
+### Post-Deployment Steps
+1. Get DoDo Payments API credentials
+2. Add DoDo credentials to Vercel env vars
+3. Create payment integration API routes:
+   - `/app/api/create-payment/route.ts`
+   - `/app/api/webhook/dodo/route.ts`
+4. Setup Resend email templates
+5. Test payment flow
+6. Update early bird counter logic
+
+## 🎯 Launch Plan
+
+- **Dec 26-30:** Deploy waitlist, collect pre-orders
+- **Dec 31:** Launch full app (enable dashboard features)
+- **Jan 1+:** Send access emails to all waitlist users
+
+## 📊 Pricing
+
+- Early Bird: $5 (first 100 spots)
+- Regular: $9 
+- Lifetime access, no subscriptions
+
+## 🔒 Disabled Features (Until Launch)
+
+- Dashboard (`/dashboard`) - Redirects to home
+- Login page - Shows waitlist message
+- All backend features preserved in code, just commented out
+
+## 📧 Contact
+
+Questions? Add your contact info here.

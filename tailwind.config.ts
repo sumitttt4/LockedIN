@@ -11,6 +11,7 @@ const config: Config = {
         extend: {
             fontFamily: {
                 sans: ["var(--font-sans)", "sans-serif"],
+                mono: ["'JetBrains Mono'", "monospace"],
             },
             colors: {
                 background: 'hsl(var(--background))',
@@ -46,13 +47,20 @@ const config: Config = {
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',
-                chart: {
-                    '1': 'hsl(var(--chart-1))',
-                    '2': 'hsl(var(--chart-2))',
-                    '3': 'hsl(var(--chart-3))',
-                    '4': 'hsl(var(--chart-4))',
-                    '5': 'hsl(var(--chart-5))'
-                }
+                // LockedIn custom colors
+                crimson: {
+                    DEFAULT: '#DC2626',
+                    50: '#FEE2E2',
+                    100: '#FECACA',
+                    200: '#FCA5A5',
+                    300: '#F87171',
+                    400: '#EF4444',
+                    500: '#DC2626',
+                    600: '#B91C1C',
+                    700: '#991B1B',
+                    800: '#7F1D1D',
+                    900: '#450A0A',
+                },
             },
             borderRadius: {
                 lg: 'var(--radius)',
