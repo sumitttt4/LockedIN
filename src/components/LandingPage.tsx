@@ -1,86 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { CountdownTimer } from "@/components/landing/CountdownTimer";
-import { LiveActivityBadge } from "@/components/landing/LiveActivityBadge";
 import { Navbar } from "@/components/layout/Navbar";
 import {
     Lock,
     Zap,
-    Target,
-    Trophy,
-    TrendingUp,
     Check
 } from "lucide-react";
 import Link from "next/link";
-import { ContributionGrid } from "@/components/ContributionGrid";
-import { DuelCard } from "@/components/DuelCard";
-import { LockedInSwitch } from "@/components/LockedInSwitch";
-import { DailyLogPreview } from "@/components/landing/DailyLogPreview";
-import { Marquee } from "@/components/landing/Marquee";
+import { LiveGoalsTicker } from "@/components/LiveGoalsTicker";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { motion } from "framer-motion";
-import confetti from "canvas-confetti";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export default function LandingPage() {
 
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-    const [waitlistPosition, setWaitlistPosition] = useState(0);
-    const [referralCode, setReferralCode] = useState("");
-    const [copied, setCopied] = useState(false);
 
-    const handleWaitlistSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const response = await fetch('/api/waitlist', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
-            });
+    // Simple state for UI interactions if needed, or remove if unused.
+    // Cleaned up waitlist logic as the project is now shipping.
 
-            if (response.ok) {
-                setSubmitted(true);
-                sessionStorage.setItem("waitlist_email", email);
-
-                // Generate random position (for viral effect)
-                const position = Math.floor(Math.random() * 400) + 100;
-                setWaitlistPosition(position);
-
-                // Generate referral code from email
-                const code = btoa(email).slice(0, 8).toUpperCase();
-                setReferralCode(code);
-
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#22c55e', '#ffffff', '#000000']
-                });
-            } else {
-                alert('Something went wrong. Please try again.');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('Error joining waitlist');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const referralLink = `https://getlockedin.live?ref=${referralCode}`;
-
-    const copyReferralLink = () => {
-        navigator.clipboard.writeText(referralLink);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
 
     return (
         <div className="flex flex-col min-h-screen relative overflow-x-hidden">
@@ -130,9 +69,9 @@ export default function LandingPage() {
                                         <span className="text-zinc-400">Not this time.</span>
                                     </h1>
                                     <p className="text-xl md:text-2xl text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-                                        Build in public where{" "}
-                                        <span className="font-semibold text-zinc-900">showing up daily</span>{" "}
-                                        is the only thing that matters.
+                                        The accountability protocol for high performers.
+                                        <br className="hidden md:block" />
+                                        <span className="font-bold text-zinc-900">No excuses. No edits. Just shipping.</span>
                                     </p>
                                 </motion.div>
 
@@ -143,181 +82,203 @@ export default function LandingPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.6, delay: 0.4 }}
                                 >
-                                    {!submitted ? (
-                                        <form onSubmit={handleWaitlistSubmit} className="flex items-center space-x-2 bg-white p-2 rounded-xl border border-zinc-200 shadow-xl shadow-zinc-200/50 focus-within:border-zinc-400 transition-all">
-                                            <Input
-                                                type="email"
-                                                placeholder="your@email.com"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                required
-                                                className="border-0 focus-visible:ring-0 shadow-none text-base bg-transparent h-11 font-medium text-zinc-900 placeholder:text-zinc-400 pl-4"
-                                            />
-                                            <Button
-                                                type="submit"
-                                                disabled={loading || !email}
-                                                className="h-11 px-6 bg-black hover:bg-zinc-800 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                {loading ? "Joining..." : "Join Waitlist"}
-                                            </Button>
-                                        </form>
-                                    ) : (
-                                        <motion.div
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            className="space-y-4"
+                                    <div className="flex flex-col items-center gap-2 w-full max-w-md mx-auto">
+
+                                        {/* THE ACTION BLOCK */}
+                                        <form
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                                window.location.href = "/checkout";
+                                            }}
+                                            className="flex flex-col sm:flex-row w-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                                         >
-                                            {/* Position Card */}
-                                            <div className="p-6 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-2xl text-center shadow-xl">
-                                                <div className="flex items-center justify-center gap-2 mb-2">
-                                                    <Check className="w-5 h-5 text-green-400" />
-                                                    <span className="text-green-400 font-semibold">You&apos;re on the list!</span>
-                                                </div>
-                                                <p className="text-5xl font-black text-white mb-1">#{waitlistPosition}</p>
-                                                <p className="text-zinc-400 text-sm">in line</p>
-                                            </div>
 
-                                            {/* Referral Hook */}
-                                            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
-                                                <p className="text-zinc-900 font-bold text-center mb-2">
-                                                    🚀 Want to skip to the front?
-                                                </p>
-                                                <p className="text-zinc-600 text-sm text-center mb-4">
-                                                    Get <span className="font-bold text-amber-600">3 friends</span> to sign up and jump ahead!
-                                                </p>
+                                            {/* 1. THE INPUT: Claiming Identity */}
+                                            <input
+                                                type="text"
+                                                placeholder="Claim your @handle..."
+                                                className="flex-1 rounded-none border-2 border-black bg-white px-4 py-4 font-mono text-sm placeholder:text-gray-500 focus:border-black focus:ring-0 outline-none w-full"
+                                            />
 
-                                                {/* Referral Link */}
-                                                <div className="flex gap-2">
-                                                    <Input
-                                                        value={referralLink}
-                                                        readOnly
-                                                        className="text-xs bg-white"
-                                                    />
-                                                    <Button
-                                                        onClick={copyReferralLink}
-                                                        variant="outline"
-                                                        className="shrink-0"
-                                                    >
-                                                        {copied ? "Copied!" : "Copy"}
-                                                    </Button>
-                                                </div>
+                                            {/* 2. THE BUTTON: High Contrast Command */}
+                                            <button
+                                                type="submit"
+                                                className="rounded-none border-2 border-l-0 border-black bg-black px-8 py-4 text-sm font-black uppercase tracking-wider text-white hover:bg-[#00FF00] hover:text-black transition-all w-full sm:w-auto"
+                                            >
+                                                Get Locked In
+                                            </button>
 
-                                                {/* Share Buttons */}
-                                                <div className="flex gap-2 mt-3">
-                                                    <Button
-                                                        size="sm"
-                                                        variant="outline"
-                                                        className="flex-1 h-9 text-xs"
-                                                        onClick={() => window.open(`https://twitter.com/intent/tweet?text=I%27m%20%23${waitlistPosition}%20on%20the%20GetLockedIN%20waitlist.%20Join%20me%3A%20${encodeURIComponent(referralLink)}`, '_blank')}
-                                                    >
-                                                        Share on X
-                                                    </Button>
-                                                    <Button
-                                                        size="sm"
-                                                        variant="outline"
-                                                        className="flex-1 h-9 text-xs"
-                                                        onClick={() => window.open(`https://wa.me/?text=Join%20the%20GetLockedIN%20waitlist%20with%20me!%20${encodeURIComponent(referralLink)}`, '_blank')}
-                                                    >
-                                                        WhatsApp
-                                                    </Button>
-                                                </div>
-                                            </div>
+                                        </form>
 
-                                            {/* Skip with Payment */}
-                                            <div className="p-4 bg-green-50 border border-green-200 rounded-xl text-center">
-                                                <p className="text-zinc-700 text-sm mb-2">
-                                                    <span className="font-bold">Or skip the line entirely</span> — get instant access for $5
-                                                </p>
-                                                <Button
-                                                    onClick={() => window.location.href = 'https://checkout.dodopayments.com/buy/pdt_0NUvc8v3ozWTrnPigc0ka?quantity=1&redirect_url=https://getlockedin.live/checkout/success'}
-                                                    className="bg-green-600 hover:bg-green-700 text-white font-bold px-6 h-10 rounded-full shadow-lg"
-                                                >
-                                                    Pay $5 → Instant Access
-                                                </Button>
-                                            </div>
-                                        </motion.div>
-                                    )}
+                                        {/* 3. THE SCARCITY TRIGGER (Replaces 'Live now...') */}
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <span className="relative flex h-2 w-2">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                            </span>
+                                            <p className="text-xs font-mono font-bold uppercase text-gray-900 tracking-tight">
+                                                Only 42 Founder Badges Remaining
+                                            </p>
+                                        </div>
 
-                                    <p className="text-sm text-zinc-400">
-                                        <span className="text-green-600 font-semibold">$5 early bird</span> · Limited spots · Lifetime access
-                                    </p>
+                                    </div>
                                 </motion.div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Marquee */}
-                    <Marquee className="mb-20" />
+                    {/* Live Ticker */}
+                    <LiveGoalsTicker className="mb-20" />
 
                     {/* Features Section (GSAP Animated) */}
                     <FeaturesSection />
 
                     {/* Pricing Section */}
+                    {/* Pricing Section */}
                     <section id="pricing" className="py-24 border-t border-zinc-100 scroll-mt-16">
-                        <div className="max-w-5xl mx-auto px-6">
-                            <div className="text-center mb-16">
-                                <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4">
+                        <div className="max-w-6xl mx-auto px-6">
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl md:text-5xl font-black text-zinc-900 mb-6">
                                     Simple Pricing
                                 </h2>
-                                <p className="text-zinc-500 text-lg">
-                                    One-time payment. Lifetime access. No subscriptions.
+                                <div className="flex items-center justify-center gap-4 mb-6">
+                                    <div className="flex -space-x-3">
+                                        {[1, 2, 3, 4, 5].map((i) => (
+                                            <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-zinc-100">
+                                                <img
+                                                    src={`https://api.dicebear.com/9.x/notionists/svg?seed=${i * 342}&backgroundColor=ffdfbf,c0aede,b6e3f4`}
+                                                    alt="User"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="text-left text-sm font-semibold text-zinc-600 leading-tight">
+                                        <span className="text-black">342 people</span> <br />
+                                        building now
+                                    </div>
+                                </div>
+                                <p className="text-lg md:text-xl font-medium text-zinc-700 max-w-2xl mx-auto leading-relaxed">
+                                    You can watch them for free, or you can join them for $9.
                                 </p>
                             </div>
 
-                            <div className="max-w-md mx-auto">
+                            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
+                                {/* CARD 1: THE TRAP (Free) */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5 }}
                                 >
-                                    <Card className="relative bg-gradient-to-b from-white to-zinc-50 border-zinc-200 shadow-xl hover:shadow-2xl transition-all">
+                                    <Card className="relative bg-white border border-zinc-200 shadow-none">
+                                        <CardContent className="p-8">
+                                            <div className="text-center mb-6">
+                                                <h3 className="text-xl font-bold text-zinc-500 uppercase tracking-widest">Spectator</h3>
+                                                <div className="mt-4 mb-2">
+                                                    <span className="text-5xl font-black text-zinc-400">$0</span>
+                                                </div>
+                                                <p className="text-sm text-zinc-500">Just watching. No commitment.</p>
+                                            </div>
+
+                                            <div className="space-y-4 mb-8">
+                                                <div className="flex items-center gap-3">
+                                                    <Check className="w-5 h-5 text-zinc-400" />
+                                                    <span className="text-zinc-600">View the Global "Grid of Truth"</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <Check className="w-5 h-5 text-zinc-400" />
+                                                    <span className="text-zinc-600">Access to Public Leaderboard</span>
+                                                </div>
+                                                <div className="flex items-center gap-3 opacity-50">
+                                                    <div className="w-5 h-5 flex items-center justify-center">
+                                                        <div className="w-4 h-0.5 bg-zinc-300 rotate-45 absolute" />
+                                                        <div className="w-4 h-0.5 bg-zinc-300 -rotate-45 absolute" />
+                                                    </div>
+                                                    <span className="text-zinc-400">Cannot create a profile</span>
+                                                </div>
+                                                <div className="flex items-center gap-3 opacity-50">
+                                                    <div className="w-5 h-5 flex items-center justify-center">
+                                                        <div className="w-4 h-0.5 bg-zinc-300 rotate-45 absolute" />
+                                                        <div className="w-4 h-0.5 bg-zinc-300 -rotate-45 absolute" />
+                                                    </div>
+                                                    <span className="text-zinc-400">Cannot join 1v1 Battles</span>
+                                                </div>
+                                                <div className="flex items-center gap-3 opacity-50">
+                                                    <div className="w-5 h-5 flex items-center justify-center">
+                                                        <div className="w-4 h-0.5 bg-zinc-300 rotate-45 absolute" />
+                                                        <div className="w-4 h-0.5 bg-zinc-300 -rotate-45 absolute" />
+                                                    </div>
+                                                    <span className="text-zinc-400">No Founder&apos;s Badge</span>
+                                                </div>
+                                            </div>
+
+                                            <Button variant="outline" className="w-full h-12 bg-white border border-black text-black hover:bg-zinc-50 font-medium rounded-md">
+                                                Spectate
+                                            </Button>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
+
+                                {/* CARD 2: THE GOAL ($9) */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.1 }}
+                                >
+                                    <Card className="relative bg-black border-none shadow-2xl hover:scale-[1.02] transition-transform z-10">
                                         {/* Badge */}
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                                            <div className="px-4 py-1.5 bg-orange-600 text-white text-xs font-bold rounded-full flex items-center gap-1.5 shadow-md shadow-orange-200">
-                                                <Zap className="w-3.5 h-3.5 fill-current" />
-                                                EARLY BIRD - Limited Spots
+                                        <div className="absolute -top-4 inset-x-0 flex justify-center">
+                                            <div className="px-4 py-1.5 bg-white border border-black text-black text-xs font-bold tracking-widest uppercase rounded-full shadow-lg">
+                                                Day 1 Cohort
                                             </div>
                                         </div>
 
-                                        <CardContent className="p-8 pt-10">
-                                            {/* Icon */}
-                                            <div className="flex justify-center mb-4">
-                                                <div className="w-16 h-16 bg-zinc-50 border border-zinc-100 rounded-2xl flex items-center justify-center text-zinc-900 shadow-sm">
-                                                    <Lock className="w-8 h-8" />
-                                                </div>
-                                            </div>
-
-                                            {/* Price */}
+                                        <CardContent className="p-8 pt-12">
                                             <div className="text-center mb-6">
-                                                <div className="flex items-center justify-center gap-3 mb-2">
-                                                    <span className="text-zinc-400 line-through text-2xl">$9</span>
-                                                    <span className="text-6xl font-black text-zinc-900">$5</span>
+                                                <h3 className="text-2xl font-black text-white uppercase tracking-widest">Operator</h3>
+                                                <div className="mt-4 mb-2 flex items-center justify-center gap-2">
+                                                    <span className="text-6xl font-black text-green-500">$9</span>
+                                                    <span className="text-lg font-bold text-zinc-400 self-end mb-2">/ lifetime</span>
                                                 </div>
-                                                <div className="text-zinc-500">One-time payment</div>
+                                                <p className="text-sm font-semibold text-zinc-300">For those ready to ship.</p>
                                             </div>
 
-                                            {/* Features */}
-                                            <div className="space-y-3 mb-8">
-                                                <div className="flex items-start gap-3">
-                                                    <Check className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                                                    <span className="text-zinc-700">Lifetime access to DayZero</span>
+                                            <div className="space-y-4 mb-8">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-1 bg-green-500 rounded-full">
+                                                        <Check className="w-3 h-3 text-black" />
+                                                    </div>
+                                                    <span className="text-white font-medium">Create your Public Protocol</span>
                                                 </div>
-                                                <div className="flex items-start gap-3">
-                                                    <Check className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                                                    <span className="text-zinc-700">Early access (Dec 31st)</span>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-1 bg-green-500 rounded-full">
+                                                        <Check className="w-3 h-3 text-black" />
+                                                    </div>
+                                                    <span className="text-white font-medium">Verified &quot;Locked In&quot; Status</span>
                                                 </div>
-                                                <div className="flex items-start gap-3">
-                                                    <Check className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                                                    <span className="text-zinc-700">Founder&apos;s Badge profile</span>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-1 bg-green-500 rounded-full">
+                                                        <Check className="w-3 h-3 text-black" />
+                                                    </div>
+                                                    <span className="text-white font-medium">Challenge others to 1v1 Battles</span>
                                                 </div>
-                                                <div className="flex items-start gap-3">
-                                                    <Check className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                                                    <span className="text-zinc-700">Future Pro features included</span>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-1 bg-green-500 rounded-full">
+                                                        <Check className="w-3 h-3 text-black" />
+                                                    </div>
+                                                    <span className="text-white font-medium">Lifetime Access (LockedIn included)</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-1 bg-green-500 rounded-full">
+                                                        <Check className="w-3 h-3 text-black" />
+                                                    </div>
+                                                    <span className="text-white font-medium">Founder&apos;s Badge (First 100)</span>
                                                 </div>
                                             </div>
 
                                             <Link href="/checkout">
-                                                <Button className="w-full h-14 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-lg shadow-lg shadow-zinc-900/20">
-                                                    Get Lifetime Access
+                                                <Button className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-bold text-lg rounded-xl tracking-tight shadow-lg transition-transform hover:scale-[1.02]">
+                                                    Initialize Protocol - $9
                                                 </Button>
                                             </Link>
                                         </CardContent>
@@ -334,13 +295,13 @@ export default function LandingPage() {
                                 <h2 className="text-3xl md:text-5xl font-bold text-zinc-900">
                                     Ready to make 2026 different?
                                     <br />
-                                    <span className="text-green-600">Join the waitlist.</span>
+                                    <span className="text-green-600">Start today.</span>
                                 </h2>
 
                                 <div className="flex flex-col items-center gap-4 pt-6">
-                                    <Link href="#hero">
+                                    <Link href="/checkout">
                                         <Button size="lg" className="h-14 px-10 bg-black hover:bg-zinc-800 text-white text-lg font-semibold shadow-xl shadow-black/20 hover:scale-105 transition-transform">
-                                            Join Waitlist
+                                            Get Locked In - $9
                                         </Button>
                                     </Link>
                                 </div>
@@ -349,26 +310,19 @@ export default function LandingPage() {
                     </section>
 
                     {/* Footer */}
-                    <footer className="border-t border-zinc-100 py-12 bg-zinc-50/50">
-                        <div className="max-w-6xl mx-auto px-6">
-                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                                <div className="flex items-center gap-2">
-                                    <div className="h-6 w-6 bg-black rounded-lg flex items-center justify-center">
-                                        <Lock className="h-3 w-3 text-white" />
-                                    </div>
-                                    <span className="font-semibold text-zinc-900">GetLockedIN</span>
-                                </div>
-
-                                <div className="flex items-center gap-6 text-sm text-zinc-500">
-                                    <a href="#" className="hover:text-zinc-900 transition-colors">Privacy</a>
-                                    <a href="#" className="hover:text-zinc-900 transition-colors">Terms</a>
-                                    <a href="#" className="hover:text-zinc-900 transition-colors">Contact</a>
-                                </div>
-
-                                <p className="text-sm text-zinc-400">
-                                    © 2026 GetLockedIN. Consistency is the only currency.
-                                </p>
+                    <footer className="border-t border-zinc-100 py-12 bg-white">
+                        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 rounded-full border border-zinc-200">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                <span className="text-xs font-mono font-medium text-zinc-600">All Systems Operational</span>
                             </div>
+
+                            <p className="text-sm text-zinc-500 font-mono">
+                                © 2025 GetLockedIn Protocol. Built in Public.
+                            </p>
                         </div>
                     </footer>
                 </main>

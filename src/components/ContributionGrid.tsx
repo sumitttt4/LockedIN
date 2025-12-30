@@ -23,7 +23,7 @@ const generateMockData = () => {
 
         data.push({
             date: date.toISOString().split('T')[0],
-            status: isCurrentlyLockedIn ? 'active' : isLogged ? 'completed' : isMissed ? 'missed' : 'empty',
+            status: isCurrentlyLockedIn ? 'active' : isLogged ? 'completed' : 'empty',
         });
     }
 
@@ -46,14 +46,14 @@ export function ContributionGrid({ className }: ContributionGridProps) {
                 <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-500">
                     365 Day Grid
                 </h3>
-                <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
+                <div className="flex items-center gap-4 text-xs font-mono text-zinc-400">
                     <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-sm bg-green-500" />
-                        Shipped
+                        <span className="w-2.5 h-2.5 rounded-sm bg-[#00FF00]" />
+                        SHIPPED
                     </span>
                     <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-sm bg-red-400" />
-                        Missed
+                        <span className="w-2.5 h-2.5 rounded-sm bg-zinc-100 border border-zinc-200" />
+                        FAILED
                     </span>
                 </div>
             </div>
@@ -67,13 +67,12 @@ export function ContributionGrid({ className }: ContributionGridProps) {
                                 <div
                                     key={`${weekIndex}-${dayIndex}`}
                                     className={cn(
-                                        "w-2.5 h-2.5 rounded-sm transition-all duration-200 hover:scale-150 cursor-pointer",
-                                        day.status === 'active' && "bg-green-400 animate-pulse",
-                                        day.status === 'completed' && "bg-green-500",
-                                        day.status === 'missed' && "bg-red-400",
-                                        day.status === 'empty' && "bg-zinc-200"
+                                        "w-2.5 h-2.5 rounded-sm transition-all duration-200 cursor-none",
+                                        day.status === 'active' && "bg-[#00FF00] animate-pulse shadow-[0_0_8px_#00FF00]",
+                                        day.status === 'completed' && "bg-[#00FF00]",
+                                        day.status === 'empty' && "bg-zinc-50 hover:bg-zinc-100"
                                     )}
-                                    title={`${day.date}: ${day.status}`}
+                                    title={`Status: ${day.status === 'completed' || day.status === 'active' ? 'SHIPPED' : 'FAILED'}`}
                                 />
                             ))}
                         </div>
@@ -87,7 +86,7 @@ export function ContributionGrid({ className }: ContributionGridProps) {
                     <span className="text-green-600 font-bold">{mockData.filter(d => d.status === 'completed' || d.status === 'active').length}</span> shipped
                 </div>
                 <div className="text-zinc-500">
-                    <span className="text-red-600 font-bold">{mockData.filter(d => d.status === 'missed').length}</span> missed
+                    <span className="text-zinc-900 font-bold">{mockData.filter(d => d.status === 'empty').length}</span> failed
                 </div>
                 <div className="text-zinc-500">
                     Streak: <span className="text-zinc-900 font-bold">12</span> days

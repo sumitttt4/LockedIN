@@ -49,8 +49,12 @@ export function DuelCard({
                 <div className="space-y-2">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-white">
-                                {challenger.name.substring(0, 2).toUpperCase()}
+                            <div className="w-10 h-10 rounded-full bg-orange-100 border-2 border-orange-500 flex items-center justify-center overflow-hidden">
+                                <img
+                                    src={`https://api.dicebear.com/9.x/notionists/svg?seed=You&backgroundColor=ffdfbf`}
+                                    alt="You"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                             <div>
                                 <div className="font-bold text-zinc-900 text-sm">{challenger.name}</div>
@@ -88,8 +92,12 @@ export function DuelCard({
                 <div className="space-y-2">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 font-bold text-xs">
-                                {opponent.name.substring(0, 2).toUpperCase()}
+                            <div className="w-10 h-10 rounded-full bg-zinc-100 border-2 border-zinc-200 flex items-center justify-center overflow-hidden grayscale">
+                                <img
+                                    src={`https://api.dicebear.com/9.x/notionists/svg?seed=${opponent.username}&backgroundColor=c0aede,b6e3f4`}
+                                    alt={opponent.name}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                             <div>
                                 <div className="font-bold text-zinc-900 text-sm">{opponent.name}</div>

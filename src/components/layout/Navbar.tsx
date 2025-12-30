@@ -9,17 +9,17 @@ export function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const navLinks = [
-        { name: "Features", href: "#features" },
-        { name: "How It Works", href: "#how-it-works" },
+        { name: "Manifesto", href: "#hero" },
+        { name: "Protocol", href: "#features" },
         { name: "Pricing", href: "#pricing" },
     ];
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white border-b border-zinc-200">
+        <nav className="sticky top-0 z-50 w-full bg-white border-b border-black">
             <div className="max-w-6xl mx-auto px-4 flex h-14 items-center justify-between">
 
                 {/* Logo */}
-                <Link href="/" className="text-lg font-semibold text-zinc-900">
+                <Link href="/" className="font-black tracking-[-0.1em] text-2xl uppercase text-zinc-900">
                     GetLockedIN
                 </Link>
 
@@ -38,11 +38,11 @@ export function Navbar() {
 
                 {/* Right Side - Desktop */}
                 <div className="hidden md:flex items-center gap-4">
-                    <Link href="/login" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
+                    <Link href="/login" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
                         Sign In
                     </Link>
-                    <Button asChild size="sm" className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white px-4">
-                        <Link href="/login">Join Waitlist</Link>
+                    <Button asChild size="sm" className="rounded-full bg-black hover:bg-zinc-800 text-white px-6 font-bold tracking-tight">
+                        <Link href="/checkout">Start Day 1</Link>
                     </Button>
                 </div>
 
@@ -72,8 +72,8 @@ export function Navbar() {
                         <Link href="/login" className="text-sm text-zinc-600 py-2" onClick={() => setMobileMenuOpen(false)}>
                             Sign In
                         </Link>
-                        <Button asChild className="w-full rounded-full bg-emerald-500 hover:bg-emerald-600 text-white">
-                            <Link href="/login" onClick={() => setMobileMenuOpen(false)}>Join Waitlist</Link>
+                        <Button asChild className="w-full rounded-full bg-black hover:bg-zinc-800 text-white font-bold">
+                            <Link href="/checkout" onClick={() => setMobileMenuOpen(false)}>Start Day 1</Link>
                         </Button>
                     </div>
                 </div>

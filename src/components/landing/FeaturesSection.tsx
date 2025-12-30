@@ -89,28 +89,29 @@ export function FeaturesSection() {
             <div className="relative w-full h-full max-w-6xl mx-auto flex items-center justify-center px-6 pt-24 pb-12">
 
                 {/* --- CARD 1: THE PROOF (Lime/Growth) --- */}
-                <div ref={addToRefs} className="absolute w-full max-w-5xl h-[65vh] bg-gradient-to-br from-lime-50 to-lime-100 border border-lime-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[1]">
-                    <div className="p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between">
+                {/* --- CARD 1: THE PROOF (Lime/Growth) --- */}
+                <div ref={addToRefs} className="absolute inset-x-4 md:inset-x-0 mx-auto w-full max-w-5xl h-[70vh] md:h-[65vh] bg-gradient-to-br from-lime-50 to-lime-100 border border-lime-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[1]">
+                    <div className="p-6 md:p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-emerald-100 rounded-lg">
                                 <Target className="w-5 h-5 text-emerald-600" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Grid of Truth</h3>
-                                <p className="text-sm text-zinc-500">Public accountability ledger</p>
+                                <h3 className="text-lg md:text-xl font-bold text-zinc-900 leading-tight">The Execution Ledger</h3>
+                                <p className="text-xs md:text-sm text-zinc-500">Public accountability ledger</p>
                             </div>
                         </div>
-                        <div className="text-xs font-mono text-emerald-600/50 font-bold tracking-widest uppercase">
+                        <div className="text-xs font-mono text-emerald-600/50 font-bold tracking-widest uppercase hidden sm:block">
                             Phase 01
                         </div>
                     </div>
-                    <div className="p-8 flex-1 flex flex-col justify-center">
-                        <p className="text-zinc-600 mb-6 max-w-xl">
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-center gap-6 overflow-y-auto">
+                        <p className="text-zinc-600 max-w-xl text-sm md:text-base leading-relaxed">
                             365-day public consistency record. Filled = showed up. Empty = missed.
-                            No editing. No hiding. Pure accountability.
+                            <br className="hidden md:block" /> No editing. No hiding. Pure accountability.
                         </p>
-                        <div className="bg-zinc-50 rounded-xl border border-zinc-200 p-6 shadow-inner">
-                            <ContributionGrid />
+                        <div className="bg-zinc-50 rounded-xl border border-zinc-200 p-4 md:p-6 shadow-inner w-full overflow-x-auto">
+                            <ContributionGrid className="min-w-[600px] md:min-w-0" />
                         </div>
                     </div>
                 </div>
@@ -124,101 +125,103 @@ export function FeaturesSection() {
                     </div>
 
                     <div className="flex-1 flex items-center justify-center relative p-12">
-                        {/* Centered Focus Interface */}
-                        <div className="bg-white rounded-[2rem] p-12 w-full max-w-lg shadow-xl shadow-violet-100/50 flex flex-col items-center gap-10 border border-violet-50 relative z-10">
+                        <div className="w-full max-w-lg mx-auto">
+                            {/* THE CARD CONTAINER - Hard Shadow, No Rounding */}
+                            <div className="bg-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
 
-                            <div className="text-center space-y-2">
-                                <h3 className="text-xs font-bold tracking-[0.2em] text-zinc-400 uppercase">Active Session</h3>
-                                <div className="text-7xl md:text-8xl font-black text-zinc-800 tracking-tighter tabular-nums font-[family-name:var(--font-geist-mono)]">
-                                    00:00:00
+                                {/* HEADER: Status Row */}
+                                <div className="flex justify-between items-center mb-8 border-b-2 border-black pb-4">
+                                    <span className="font-mono text-xs uppercase font-bold tracking-widest text-gray-500">
+                                        // SESSION_TIMER
+                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-red-500 animate-pulse"></span>
+                                        <span className="font-mono text-xs font-bold uppercase text-red-500">
+                                            SYSTEM IDLE
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] text-zinc-400 uppercase">
-                                <div className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
-                                Ready to lock in
-                            </div>
+                                {/* THE TIMER: Huge, Monospace, Tabular */}
+                                <div className="text-center py-6">
+                                    <h2 className="font-mono text-7xl md:text-8xl font-black tracking-tighter text-black tabular-nums">
+                                        00:00:00
+                                    </h2>
+                                </div>
 
-                            <Button
-                                className="w-full h-16 bg-black hover:bg-zinc-900 text-white rounded-full text-lg font-bold tracking-widest uppercase transition-transform hover:scale-[1.02] shadow-xl shadow-black/10 flex items-center justify-center gap-3"
-                            >
-                                <Zap className="w-5 h-5 fill-current" />
-                                Lock In
-                            </Button>
-                        </div>
+                                {/* THE ACTION: The "Detonator" Button */}
+                                <div className="mt-8">
+                                    <button className="w-full rounded-none bg-black py-5 text-xl font-bold uppercase tracking-widest text-white hover:bg-[#00FF00] hover:text-black border-2 border-transparent hover:border-black transition-all active:translate-y-1">
+                                        ⚡ INITIATE PROTOCOL
+                                    </button>
 
-                        {/* Decor / Floating Elements */}
-                        <div className="absolute top-1/2 right-24 -translate-y-1/2 hidden lg:flex flex-col gap-6 opacity-80 pointer-events-none">
-                            {/* Abstract App Window */}
-                            <div className="w-24 h-24 bg-white rounded-2xl shadow-lg border border-violet-50 transform rotate-12 flex items-center justify-center">
-                                <div className="w-12 h-12 rounded-xl bg-violet-50" />
-                            </div>
-                            {/* C Loading Shape */}
-                            <div className="w-32 h-32 bg-white rounded-[2rem] shadow-lg border border-violet-50 transform -rotate-6 flex items-center justify-center">
-                                <svg className="w-12 h-12 text-orange-500 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-                                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                                </svg>
+                                    <p className="mt-3 text-center font-mono text-[10px] text-gray-400 uppercase tracking-tight">
+                                        Warning: Once started, session cannot be paused.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* --- CARD 3: DAILY LOG (Pink/Rose - Personal) --- */}
-                <div ref={addToRefs} className="absolute w-full max-w-5xl h-[65vh] bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[3] translate-y-[150%]">
-                    <div className="p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between">
+                {/* --- CARD 3: DAILY LOG (Pink/Rose - Personal) --- */}
+                <div ref={addToRefs} className="absolute inset-x-4 md:inset-x-0 mx-auto w-full max-w-5xl h-[70vh] md:h-[65vh] bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[3] translate-y-[150%]">
+                    <div className="p-6 md:p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-pink-100 rounded-lg">
                                 <TrendingUp className="w-5 h-5 text-pink-600" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Daily Log</h3>
-                                <p className="text-sm text-zinc-500">Track your progress</p>
+                                <h3 className="text-lg md:text-xl font-bold text-zinc-900 leading-tight">Daily Log</h3>
+                                <p className="text-xs md:text-sm text-zinc-500">Track your progress</p>
                             </div>
                         </div>
-                        <div className="text-xs font-mono text-pink-500 font-bold tracking-widest uppercase">
+                        <div className="text-xs font-mono text-pink-500 font-bold tracking-widest uppercase hidden sm:block">
                             Phase 03
                         </div>
                     </div>
-                    <div className="p-8 flex-1 overflow-hidden flex items-center justify-center bg-zinc-50/50">
+                    <div className="p-6 md:p-8 flex-1 overflow-y-auto flex items-center justify-center bg-zinc-50/50">
                         <div className="w-full max-w-2xl shadow-lg border border-zinc-200 rounded-xl overflow-hidden">
-                            <DailyLogPreview className="w-full" />
+                            <DailyLogPreview className="w-full min-h-[300px]" />
                         </div>
                     </div>
                 </div>
 
                 {/* --- CARD 4: METRICS (Blue/Trust) --- */}
-                <div ref={addToRefs} className="absolute w-full max-w-5xl h-[65vh] bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[4] translate-y-[150%]">
-                    <div className="p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between">
+                {/* --- CARD 4: METRICS (Blue/Trust) --- */}
+                <div ref={addToRefs} className="absolute inset-x-4 md:inset-x-0 mx-auto w-full max-w-5xl h-[70vh] md:h-[65vh] bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[4] translate-y-[150%]">
+                    <div className="p-6 md:p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-blue-100 rounded-lg">
                                 <TrendingUp className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-zinc-900">Revenue Metrics</h3>
-                                <p className="text-sm text-zinc-500">Visualize your growth</p>
+                                <h3 className="text-lg md:text-xl font-bold text-zinc-900 leading-tight">Visual Proof</h3>
+                                <p className="text-xs md:text-sm text-zinc-500">Visualize your growth</p>
                             </div>
                         </div>
-                        <div className="text-xs font-mono text-blue-500 font-bold tracking-widest uppercase">
+                        <div className="text-xs font-mono text-blue-500 font-bold tracking-widest uppercase hidden sm:block">
                             Phase 04
                         </div>
                     </div>
-                    <div className="p-8 flex-1 flex items-center justify-center relative">
+                    <div className="p-6 md:p-8 flex-1 flex items-center justify-center relative overflow-hidden">
                         {/* Floating Icons Background */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-100/50 to-transparent" />
                         </div>
 
                         {/* Main Floating Card */}
-                        <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-blue-100 w-full max-w-[400px] z-10 mx-auto">
+                        <div className="relative bg-white rounded-3xl p-6 md:p-8 shadow-2xl border border-blue-100 w-full max-w-[320px] md:max-w-[400px] z-10 mx-auto flex flex-col gap-6">
 
                             {/* Stripe (Top Left) */}
-                            <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#635BFF] rounded-full flex items-center justify-center shadow-lg transform -rotate-12 border-4 border-white overflow-hidden">
-                                <span className="text-white font-bold text-2xl italic pr-0.5">S</span>
+                            <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-10 h-10 md:w-12 md:h-12 bg-[#635BFF] rounded-full flex items-center justify-center shadow-lg transform -rotate-12 border-4 border-white overflow-hidden">
+                                <span className="text-white font-bold text-xl md:text-2xl italic pr-0.5">S</span>
                             </div>
 
                             {/* Dodo Payments (Top Right) */}
-                            <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#E5F849] rounded-full flex items-center justify-center shadow-lg transform rotate-12 border-4 border-white">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-black fill-current">
+                            <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 w-10 h-10 md:w-12 md:h-12 bg-[#E5F849] rounded-full flex items-center justify-center shadow-lg transform rotate-12 border-4 border-white">
+                                <svg width="20" height="20" md-width="24" md-height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-black fill-current w-5 h-5 md:w-6 md:h-6">
                                     <path d="M16.5 3C19.5376 3 22 5.46243 22 8.5C22 11.5376 19.5376 14 16.5 14H5V8.5C5 5.46243 7.46243 3 10.5 3H16.5Z" />
                                     <path d="M5 14H16.5C18.5 14 20.5 15 21 17C21.5 19 20 21 18 21H5V14Z" />
                                     <circle cx="17.5" cy="8.5" r="1.5" fill="white" />
@@ -226,30 +229,30 @@ export function FeaturesSection() {
                             </div>
 
                             {/* Polar (Bottom Left) */}
-                            <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-black rounded-full flex items-center justify-center shadow-lg transform rotate-12 border-4 border-white">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center shadow-lg transform rotate-12 border-4 border-white">
+                                <svg width="20" height="20" md-width="24" md-height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white w-5 h-5 md:w-6 md:h-6">
                                     <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(90 12 12)" />
                                     <ellipse cx="12" cy="12" rx="10" ry="4" />
                                 </svg>
                             </div>
 
                             {/* Lemon Squeezy (Bottom Right) */}
-                            <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-[#7047EB] rounded-full flex items-center justify-center shadow-lg transform -rotate-12 border-4 border-white">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="none" className="text-[#FFDD00] fill-current">
+                            <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-10 h-10 md:w-12 md:h-12 bg-[#7047EB] rounded-full flex items-center justify-center shadow-lg transform -rotate-12 border-4 border-white">
+                                <svg width="20" height="20" md-width="24" md-height="24" viewBox="0 0 24 24" fill="none" stroke="none" className="text-[#FFDD00] fill-current w-5 h-5 md:w-6 md:h-6">
                                     <path d="M15.5 2L13.5 13H21L9.5 22L11 9.5H3.5L15.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                 </svg>
                             </div>
 
                             {/* Card Content */}
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-2 text-zinc-500 font-medium">
+                            <div className="space-y-4 md:space-y-6">
+                                <div className="flex items-center gap-2 text-zinc-500 font-medium text-sm md:text-base">
                                     <TrendingUp className="w-5 h-5 text-blue-500" />
                                     <span>Revenue Goal</span>
                                 </div>
 
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-5xl font-bold text-zinc-900 tracking-tight">$8,420</span>
-                                    <span className="text-xl text-zinc-400 font-medium">/ $10,000</span>
+                                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                                    <span className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight">$8,420</span>
+                                    <span className="text-base md:text-xl text-zinc-400 font-medium">/ $10,000</span>
                                 </div>
 
                                 <div className="space-y-2">
@@ -258,7 +261,7 @@ export function FeaturesSection() {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-2 text-sm text-zinc-400 pt-2">
+                                <div className="flex items-center gap-2 text-xs md:text-sm text-zinc-400 pt-2">
                                     <div className="w-4 h-4 rounded-full border-2 border-zinc-200 border-t-blue-500 animate-spin" />
                                     <span>Auto-syncing via Stripe...</span>
                                 </div>
@@ -268,22 +271,25 @@ export function FeaturesSection() {
                 </div>
 
                 {/* --- CARD 5: THE ARENA (Amber/Energy) --- */}
-                <div ref={addToRefs} className="absolute w-full max-w-5xl h-[65vh] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[5] translate-y-[150%]">
-                    <div className="p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between">
+                {/* --- CARD 5: THE ARENA (Amber/Energy) --- */}
+                <div ref={addToRefs} className="absolute inset-x-4 md:inset-x-0 mx-auto w-full max-w-5xl h-[70vh] md:h-[65vh] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-[5] translate-y-[150%]">
+                    <div className="p-6 md:p-8 border-b border-zinc-100/50 bg-white/50 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-amber-100 rounded-lg">
                                 <Trophy className="w-5 h-5 text-amber-600" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-zinc-900">1v1 Battles</h3>
-                                <p className="text-sm text-zinc-500">Competitive accountability</p>
+                                <h3 className="text-lg md:text-xl font-bold text-zinc-900 leading-tight">1v1 Battles</h3>
+                                <p className="text-xs md:text-sm text-zinc-500">
+                                    <span className="font-bold text-red-500">Loser Resets Streak</span> · Competitive Accountability
+                                </p>
                             </div>
                         </div>
-                        <div className="text-xs font-mono text-amber-500 font-bold tracking-widest uppercase">
+                        <div className="text-xs font-mono text-amber-500 font-bold tracking-widest uppercase hidden sm:block">
                             Phase 05
                         </div>
                     </div>
-                    <div className="p-8 flex-1 flex items-center justify-center bg-gradient-to-b from-transparent to-orange-50/30">
+                    <div className="p-6 md:p-8 flex-1 flex items-center justify-center bg-gradient-to-b from-transparent to-orange-50/30 overflow-y-auto">
                         <div className="w-full max-w-md">
                             <DuelCard
                                 challenger={{ name: "You", username: "you", hp: 100 }}

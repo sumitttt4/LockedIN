@@ -18,7 +18,7 @@ export function FeaturesBento() {
                         Automate your ambition.
                     </h2>
                     <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-                        Manual tracking is for amateurs. DayZero connects to your real work to verify your progress instantly.
+                        Manual tracking is for amateurs. LockedIn connects to your real work to verify your progress instantly.
                     </p>
                 </div>
 

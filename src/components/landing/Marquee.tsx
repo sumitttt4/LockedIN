@@ -17,14 +17,13 @@ const MARQUEE_ITEMS = [
 
 export function Marquee({ className }: { className?: string }) {
     return (
-        <div className={cn("w-full overflow-hidden bg-zinc-50 border-y border-zinc-200 py-4", className)}>
+        <div className={cn("w-full overflow-hidden bg-black border-y border-black py-4", className)}>
             <div className="flex w-max animate-marquee space-x-12">
                 {/* First Set */}
                 <div className="flex space-x-12 items-center">
                     {MARQUEE_ITEMS.map((item, i) => (
                         <span key={i} className={cn(
-                            "text-lg md:text-xl font-black tracking-widest uppercase",
-                            item === "LOCKED IN" ? "text-green-600" : "text-zinc-400"
+                            "text-lg md:text-xl font-bold tracking-wider font-mono uppercase text-[#00FF00]"
                         )}>
                             {item}
                         </span>
@@ -34,8 +33,7 @@ export function Marquee({ className }: { className?: string }) {
                 <div className="flex space-x-12 items-center" aria-hidden="true">
                     {MARQUEE_ITEMS.map((item, i) => (
                         <span key={`dup-${i}`} className={cn(
-                            "text-lg md:text-xl font-black tracking-widest uppercase",
-                            item === "LOCKED IN" ? "text-green-600" : "text-zinc-400"
+                            "text-lg md:text-xl font-bold tracking-wider font-mono uppercase text-[#00FF00]"
                         )}>
                             {item}
                         </span>
