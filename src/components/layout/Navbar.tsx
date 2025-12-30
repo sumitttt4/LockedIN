@@ -15,7 +15,7 @@ export function Navbar() {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white border-b border-black">
+        <nav className="sticky top-0 z-50 w-full bg-zinc-100/95 backdrop-blur-md border-b border-black">
             <div className="max-w-6xl mx-auto px-4 flex h-14 items-center justify-between">
 
                 {/* Logo */}
@@ -38,10 +38,7 @@ export function Navbar() {
 
                 {/* Right Side - Desktop */}
                 <div className="hidden md:flex items-center gap-4">
-                    <Link href="/login" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
-                        Sign In
-                    </Link>
-                    <Button asChild size="sm" className="rounded-full bg-black hover:bg-zinc-800 text-white px-6 font-bold tracking-tight">
+                    <Button asChild size="sm" className="rounded-none bg-black hover:bg-zinc-800 text-white px-6 font-bold tracking-tight">
                         <Link href="/checkout">Start Day 1</Link>
                     </Button>
                 </div>
@@ -57,7 +54,7 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden border-t border-zinc-100 bg-white px-4 py-4 space-y-3">
+                <div className="md:hidden border-t border-black bg-zinc-100 px-4 py-4 space-y-3">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -69,10 +66,7 @@ export function Navbar() {
                         </Link>
                     ))}
                     <div className="pt-2 flex flex-col gap-2">
-                        <Link href="/login" className="text-sm text-zinc-600 py-2" onClick={() => setMobileMenuOpen(false)}>
-                            Sign In
-                        </Link>
-                        <Button asChild className="w-full rounded-full bg-black hover:bg-zinc-800 text-white font-bold">
+                        <Button asChild className="w-full rounded-none bg-black hover:bg-zinc-800 text-white font-bold">
                             <Link href="/checkout" onClick={() => setMobileMenuOpen(false)}>Start Day 1</Link>
                         </Button>
                     </div>

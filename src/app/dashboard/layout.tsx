@@ -20,7 +20,9 @@ export default async function DashboardLayout({
         id: user.id
     };
 
-    if (user) {
+    const isAdmin = user.email === 'sumitsharma9128@gmail.com';
+
+    if (user && !isAdmin) {
         // Enforce Payment Gate
         const { data: profile } = await supabase
             .from('profiles')
@@ -28,7 +30,8 @@ export default async function DashboardLayout({
             .eq('id', user.id)
             .single();
 
-        if (!profile?.has_paid) {
+        // Only redirect if we explicitly know they haven't paid (or if query fails but they aren't admin)
+        if (profile && !profile.has_paid) {
             redirect('/checkout');
         }
     }

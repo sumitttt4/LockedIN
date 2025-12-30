@@ -26,7 +26,7 @@ export default function LandingPage() {
             <SmoothScroll />
             {/* Crosshatch Art - Light Pattern */}
             <div
-                className="fixed inset-0 z-0 pointer-events-none bg-white"
+                className="fixed inset-0 z-0 pointer-events-none bg-zinc-100"
                 style={{
                     backgroundImage: `
                         repeating-linear-gradient(22.5deg, transparent, transparent 2px, rgba(75, 85, 99, 0.06) 2px, rgba(75, 85, 99, 0.06) 3px, transparent 3px, transparent 8px),
@@ -141,7 +141,7 @@ export default function LandingPage() {
 
                     {/* Pricing Section */}
                     {/* Pricing Section */}
-                    <section id="pricing" className="py-24 border-t border-zinc-100 scroll-mt-16">
+                    <section id="pricing" className="py-24 border-t border-zinc-200 scroll-mt-16">
                         <div className="max-w-6xl mx-auto px-6">
                             <div className="text-center mb-12">
                                 <h2 className="text-3xl md:text-5xl font-black text-zinc-900 mb-6">
@@ -295,7 +295,7 @@ export default function LandingPage() {
                     </section>
 
                     {/* Final CTA */}
-                    <section className="py-24 border-t border-zinc-100">
+                    <section className="py-24 border-t border-zinc-200">
                         <div className="max-w-4xl mx-auto px-6 text-center">
                             <div className="space-y-6">
                                 <h2 className="text-3xl md:text-5xl font-bold text-zinc-900">
@@ -307,7 +307,7 @@ export default function LandingPage() {
                                 <div className="flex flex-col items-center gap-4 pt-6">
                                     <Link href="/checkout">
                                         <Button size="lg" className="h-14 px-10 bg-black hover:bg-zinc-800 text-white text-lg font-semibold shadow-xl shadow-black/20 hover:scale-105 transition-transform">
-                                            Get Locked In - $9
+                                            Get Locked In
                                         </Button>
                                     </Link>
                                 </div>
@@ -316,7 +316,7 @@ export default function LandingPage() {
                     </section>
 
                     {/* Footer */}
-                    <footer className="border-t border-zinc-100 py-12 bg-white">
+                    <footer className="border-t border-zinc-200 py-12 bg-zinc-100">
                         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
                             <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 rounded-full border border-zinc-200">
                                 <span className="relative flex h-2 w-2">

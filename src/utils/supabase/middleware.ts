@@ -38,9 +38,10 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    // If user is logged in, don't let them go to login page, redirect to dashboard
+    // If user is logged in, don't let them go to login page, redirect to checkout
+    // Checkout will handle the check if they already paid and redirect to dashboard.
     if (request.nextUrl.pathname.startsWith("/login") && user) {
-        return NextResponse.redirect(new URL("/dashboard", request.url));
+        return NextResponse.redirect(new URL("/checkout", request.url));
     }
 
     return supabaseResponse;

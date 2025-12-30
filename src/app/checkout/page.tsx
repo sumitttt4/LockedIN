@@ -13,12 +13,19 @@ export default async function CheckoutPage() {
     }
 
     // 2. Check Payment Status
-    const { data: profile } = await supabase
+    const isAdmin = user.email === 'sumitsharma9128@gmail.com';
+
+    if (isAdmin) {
+        redirect("/dashboard");
+    }
+
+    const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('has_paid, username')
         .eq('id', user.id)
         .single();
 
+    // Debug help: if column is missing, we still want the page to render or redirect
     if (profile?.has_paid) {
         redirect("/dashboard");
     }
