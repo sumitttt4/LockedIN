@@ -46,7 +46,7 @@ export function DashboardLayoutClient({
     const userBadge = user?.email?.split('@')[0] || "OPERATOR";
 
     return (
-        <div className="min-h-screen bg-white font-sans text-zinc-900 flex">
+        <div className="h-screen overflow-hidden bg-white font-sans text-zinc-900 flex">
 
             {/* MOBILE OVERLAY */}
             {sidebarOpen && (
@@ -59,7 +59,7 @@ export function DashboardLayoutClient({
             {/* SIDEBAR */}
             <aside
                 className={cn(
-                    "fixed top-0 left-0 z-50 h-screen w-64 bg-black text-white border-r-2 border-black transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col justify-between",
+                    "fixed top-0 left-0 z-50 h-full w-64 bg-black text-white border-r-2 border-black transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col justify-between flex-shrink-0 overflow-y-auto",
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
@@ -84,9 +84,9 @@ export function DashboardLayoutClient({
                                     href={item.href}
                                     onClick={() => setSidebarOpen(false)}
                                     className={cn(
-                                        "flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wider transition-all border-l-2",
+                                        "flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wider transition-all border-l-4",
                                         isActive
-                                            ? "border-[#00FF00] text-[#00FF00] bg-zinc-900"
+                                            ? "border-[#00FF00] text-[#00FF00] bg-black"
                                             : "border-transparent text-zinc-500 hover:text-white hover:bg-zinc-900/50"
                                     )}
                                 >
@@ -111,7 +111,7 @@ export function DashboardLayoutClient({
             </aside>
 
             {/* MAIN CONTENT WRAPPER */}
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
 
                 {/* TOP BAR */}
                 <header className="h-16 bg-white border-b-2 border-black flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">

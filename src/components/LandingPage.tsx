@@ -88,7 +88,11 @@ export default function LandingPage() {
                                         <form
                                             onSubmit={(e) => {
                                                 e.preventDefault();
-                                                window.location.href = "/checkout";
+                                                const form = e.target as HTMLFormElement;
+                                                const input = form.querySelector('input') as HTMLInputElement;
+                                                const username = input.value;
+                                                // Redirect to Login with pre-filled username intent
+                                                window.location.href = `/login?username=${encodeURIComponent(username)}`;
                                             }}
                                             className="flex flex-col sm:flex-row w-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                                         >
@@ -96,8 +100,10 @@ export default function LandingPage() {
                                             {/* 1. THE INPUT: Claiming Identity */}
                                             <input
                                                 type="text"
+                                                name="username"
                                                 placeholder="Claim your @handle..."
                                                 className="flex-1 rounded-none border-2 border-black bg-white px-4 py-4 font-mono text-sm placeholder:text-gray-500 focus:border-black focus:ring-0 outline-none w-full"
+                                                required
                                             />
 
                                             {/* 2. THE BUTTON: High Contrast Command */}

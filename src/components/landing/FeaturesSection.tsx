@@ -143,8 +143,8 @@ export function FeaturesSection() {
                                 </div>
 
                                 {/* THE TIMER: Huge, Monospace, Tabular */}
-                                <div className="text-center py-6">
-                                    <h2 className="font-mono text-7xl md:text-8xl font-black tracking-tighter text-black tabular-nums">
+                                <div className="text-center py-6 overflow-hidden">
+                                    <h2 className="font-mono text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter text-black tabular-nums whitespace-nowrap">
                                         00:00:00
                                     </h2>
                                 </div>

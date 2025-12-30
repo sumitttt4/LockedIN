@@ -17,7 +17,8 @@ export async function loginWithMagicLink(formData: FormData) {
         email,
         options: {
             // Redirect to the callback route which handles the code exchange
-            emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/callback`,
+            // Force redirect to /checkout to ensure payment check
+            emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/callback?next=/checkout`,
         },
     });
 
@@ -34,7 +35,8 @@ export async function loginWithOAuth(provider: 'google' | 'github') {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/callback`,
+            // Force redirect to /checkout to ensure payment check
+            redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/auth/callback?next=/checkout`,
         },
     });
 
