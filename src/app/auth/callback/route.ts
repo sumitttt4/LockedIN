@@ -4,7 +4,8 @@ import { createClient } from "@/utils/supabase/server";
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url);
     const code = searchParams.get("code");
-    const next = searchParams.get("next") ?? "/dashboard";
+    // Always redirect to checkout after login - it will handle redirecting to dashboard if already paid
+    const next = "/checkout";
 
     if (code) {
         const supabase = await createClient();
