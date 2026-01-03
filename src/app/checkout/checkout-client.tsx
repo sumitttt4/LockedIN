@@ -15,7 +15,8 @@ export default function CheckoutForm() {
         setError("");
 
         // Check if DoDo is configured (production mode)
-        const useDoDo = process.env.NEXT_PUBLIC_USE_DODO_PAYMENTS === 'true';
+        // Force TRUE for launch to avoid Simulation Error
+        const useDoDo = true;
 
         if (useDoDo) {
             // Use real DoDo Payments

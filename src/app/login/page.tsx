@@ -21,7 +21,7 @@ export default function LoginPage() {
         if (result?.error) {
             setMessage({ type: 'error', text: result.error });
         } else if (result?.success) {
-            setMessage({ type: 'success', text: result.success });
+            setMessage({ type: 'success', text: result.success + " (Please check your Spam/Promotions folder if not received)" });
         }
 
         setIsLoading(false);
