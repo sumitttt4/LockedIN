@@ -23,7 +23,8 @@ export async function createDoDoCheckout() {
     // Construct final URL with pre-filled email and redirect
     // Note: DoDo supports 'email' param to pre-fill customer email
     // Fix: Fallback to empty string if email is undefined to satisfy TS
-    const checkoutUrl = `${PRODUCT_LINK}?quantity=1&redirect_url=${encodeURIComponent(returnUrl)}&email=${encodeURIComponent(user.email || '')}`;
+    const userEmail = user.email || '';
+    const checkoutUrl = `${PRODUCT_LINK}?quantity=1&redirect_url=${encodeURIComponent(returnUrl)}&email=${encodeURIComponent(userEmail)}`;
 
     return {
         success: true,
