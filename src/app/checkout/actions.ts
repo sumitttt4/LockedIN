@@ -18,7 +18,7 @@ export async function createDoDoCheckout() {
     const PRODUCT_LINK = "https://checkout.dodopayments.com/buy/pdt_0NUvc8v3ozWTrnPigc0ka";
 
     // Construct return URL (success page)
-    const returnUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://getlockedin.live'}/checkout/success`;
+    const returnUrl = 'https://getlockedin.live/checkout/success';
 
     // Construct final URL with pre-filled email and redirect
     // Note: DoDo supports 'email' param to pre-fill customer email
