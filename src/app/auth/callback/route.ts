@@ -10,8 +10,11 @@ export async function GET(request: Request) {
     if (code) {
         const supabase = await createClient();
         const { error } = await supabase.auth.exchangeCodeForSession(code);
+
         if (!error) {
-            return NextResponse.redirect(`${origin}${next}`);
+            // Force redirect to checkout with proper cookie handling
+            const redirectUrl = new URL(next, origin);
+            return NextResponse.redirect(redirectUrl);
         }
     }
 

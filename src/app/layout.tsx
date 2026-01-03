@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CookieConsent } from "@/components/CookieConsent";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,6 +37,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen antialiased overflow-x-hidden bg-zinc-100">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
